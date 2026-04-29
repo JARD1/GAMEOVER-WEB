@@ -52,10 +52,9 @@ export default function ProductCard({ product }) {
       </div>
 
       {/* CONTENIDO Y DESCRIPCIÓN */}
-      {/* Redujimos el padding en móviles de p-5 a p-3 */}
       <div className="flex flex-1 flex-col justify-between p-3 md:p-5 space-y-3 md:space-y-4">
         <div className="space-y-2 md:space-y-3">
-          {/* TÍTULO SIN RESTRICCIONES DE LÍNEAS */}
+          {/* TÍTULO */}
           <h3 className="font-display text-sm md:text-lg leading-tight uppercase tracking-tighter text-white group-hover:text-purple-400 transition-colors">
             {product.title}
           </h3>
@@ -63,20 +62,41 @@ export default function ProductCard({ product }) {
           <div className="h-px w-8 md:w-12 bg-purple-500/50" />
           
           {/* DESCRIPCIÓN */}
-          {/* Menos altura en móviles (h-20) y texto más pequeño */}
-          <div className="text-xs md:text-sm leading-relaxed text-gray-300 whitespace-pre-wrap h-20 md:h-36 overflow-y-auto scrollbar-thin pr-1 md:pr-2">
+          <div className="text-xs md:text-sm leading-relaxed text-gray-300 whitespace-pre-wrap h-16 md:h-28 overflow-y-auto scrollbar-thin pr-1 md:pr-2">
             {product.description}
           </div>
         </div>
 
-        {/* ZONA DE COMPRA */}
-        <div className="mt-auto pt-3 md:pt-4 border-t border-white/5 text-center">
+        {/* ZONA DE PRECIO Y COMPRA */}
+        <div className="mt-auto pt-3 md:pt-4 border-t border-white/5 flex flex-col gap-3">
+          
+          {/* Bloque del Precio Gigante */}
+          <div className="flex items-end justify-between px-1">
+            <span className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-1">
+              Precio Total
+            </span>
+            
+            <div className="flex flex-col items-end">
+              {/* Si está en oferta, mostramos el precio viejo tachado */}
+              {product.isOnSale && product.originalPrice && (
+                <span className="text-[10px] md:text-xs text-red-500 line-through font-bold mb-[-4px]">
+                  {product.originalPrice}€
+                </span>
+              )}
+              {/* 🔥 PRECIO BLANCO CON AURA VERDE 🔥 */}
+              <span className="text-2xl md:text-3xl font-display font-black text-white drop-shadow-[0_0_12px_rgba(57,255,20,0.9)]">
+                {product.price}€
+              </span>
+            </div>
+          </div>
+
+          {/* Botón de Compra Independiente */}
           <Link 
             href={`https://wa.me/584242518228?text=${mensajeWhatsapp}`} 
             target="_blank"
-            className="inline-flex w-full items-center justify-center gap-2 border-2 border-neon bg-neon/5 px-3 md:px-6 py-2 md:py-3 text-[9px] md:text-[11px] font-black uppercase tracking-widest text-neon transition-all hover:bg-neon hover:text-black hover:shadow-[0_0_15px_rgba(57,255,20,0.4)] rounded-sm"
+            className="inline-flex w-full items-center justify-center gap-2 border-2 border-neon bg-neon/10 px-3 md:px-6 py-2.5 md:py-3 text-[10px] md:text-[11px] font-black uppercase tracking-widest text-neon transition-all hover:bg-neon hover:text-black hover:shadow-[0_0_15px_rgba(57,255,20,0.6)] rounded-sm"
           >
-            Adquirir {product.price}€
+            Adquirir Ahora
           </Link>
         </div>
       </div>
